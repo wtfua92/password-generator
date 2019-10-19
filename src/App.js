@@ -1,8 +1,9 @@
+import { hot } from "react-hot-loader/root";
 import React, { useState } from "react";
 import "./index.scss";
 import PasswordGenerator from "./tools/generator";
-import Result from "./components/Result";
-import Settings from "./components/Settings";
+import Result from "./components/Result/Result";
+import Settings from "./components/Settings/Settings";
 
 const App = function() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -46,4 +47,4 @@ const App = function() {
   );
 };
 
-export default App;
+export default hot(App);

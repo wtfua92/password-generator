@@ -1,11 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import "./Result.scss";
+
 function Result({ currentPassword }) {
   return (
     <div className="password-generator__result">
       <label htmlFor="password">Your Secure Password: </label>
-      <input id="password" type="text" value={currentPassword} disabled />
+      <input
+        className={currentPassword ? "with-password" : ""}
+        id="password"
+        type="text"
+        value={currentPassword}
+        disabled
+      />
     </div>
   );
 }

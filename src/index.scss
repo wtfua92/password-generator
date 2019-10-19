@@ -1,12 +1,69 @@
+@import "assets/styles/colors";
+
 * {
   font-family: 'Roboto Mono', monospace;
 }
 
 body {
-  background-color: #333;
+  background-color: $black;
+  color: $white;
 }
 
-#app {
-  margin: 20px auto;
-  color: #f3f3f3;
+.password-generator {
+  display: flex;
+  width: 80%;
+  margin: 2rem auto;
+  flex-direction: column;
+
+  @media (min-width: 767px) {
+    width: 60%;
+  }
+
+  &__settings {
+    margin-bottom: .75rem;
+
+    &__item {
+      label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.25rem;
+      }
+
+      input[type="checkbox"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        background-color: $white;
+        outline: none;
+        cursor: pointer;
+        transition-duration: 0.3s;
+
+        &:checked {
+          position: relative;
+          background-color: $success;
+        }
+      }
+
+      span {
+        padding-left: 0.25rem;
+      }
+    }
+
+    &__length {
+      margin-bottom: 0.75rem;
+      input[type="number"] {
+        width: 20%;
+        margin-left: .5rem;
+        text-align: center;
+        outline: none;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $white;
+        color: $white;
+      }
+
+    }
+  }
 }

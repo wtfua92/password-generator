@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { types } from "../tools/constants";
+import { types } from "../../tools/constants";
 
 Settings.propTypes = {
   settings: PropTypes.shape({
@@ -20,7 +20,7 @@ function Settings({
 }) {
   return (
     <div className="password-generator__settings">
-      <div>
+      <div className="password-generator__settings__length">
         <label htmlFor="passwordLength">Length: </label>
         <input
           id="passwordLength"
@@ -31,7 +31,7 @@ function Settings({
           }}
         />
       </div>
-      <div>
+      <div className="password-generator__settings__item">
         <label htmlFor="useNumber">
           <input
             id="useNumber"
@@ -41,10 +41,10 @@ function Settings({
               changeSettingsHandler(types.NUMBER.toLowerCase());
             }}
           />
-          use number
+          <span>use number</span>
         </label>
       </div>
-      <div>
+      <div className="password-generator__settings__item">
         <label htmlFor="useUpperCase">
           <input
             id="useUpperCase"
@@ -54,10 +54,10 @@ function Settings({
               changeSettingsHandler(types.UPPERCASE.toLowerCase());
             }}
           />
-          use uppercase
+          <span>use uppercase</span>
         </label>
       </div>
-      <div>
+      <div className="password-generator__settings__item">
         <label htmlFor="useSymbol">
           <input
             id="useSymbol"
@@ -67,7 +67,7 @@ function Settings({
               changeSettingsHandler(types.SYMBOL.toLowerCase());
             }}
           />
-          use special symbols
+          <span>use special symbols</span>
         </label>
       </div>
     </div>
