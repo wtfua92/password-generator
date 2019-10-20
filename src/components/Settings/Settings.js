@@ -3,18 +3,19 @@ import PropTypes from "prop-types";
 import { types } from "../../tools/constants";
 
 Settings.propTypes = {
+  passwordLength: PropTypes.number,
   settings: PropTypes.shape({
-    passwordLength: PropTypes.number,
-    number: PropTypes.bool,
-    upperCase: PropTypes.bool,
-    symbol: PropTypes.bool
+    [types.UPPERCASE]: PropTypes.bool,
+    [types.INTEGER]: PropTypes.bool,
+    [types.SYMBOL]: PropTypes.bool
   }),
   changeSettingsHandler: PropTypes.func,
   changePasswordLengthHandler: PropTypes.func
 };
 
 function Settings({
-  settings: { passwordLength, number, upperCase, symbol },
+  settings,
+  passwordLength,
   changeSettingsHandler,
   changePasswordLengthHandler
 }) {
@@ -36,9 +37,9 @@ function Settings({
           <input
             id="useNumber"
             type="checkbox"
-            value={number}
+            value={settings[types.INTEGER]}
             onChange={() => {
-              changeSettingsHandler(types.NUMBER.toLowerCase());
+              changeSettingsHandler(types.INTEGER);
             }}
           />
           <span>use number</span>
@@ -49,9 +50,9 @@ function Settings({
           <input
             id="useUpperCase"
             type="checkbox"
-            value={upperCase}
+            value={settings[types.UPPERCASE]}
             onChange={() => {
-              changeSettingsHandler(types.UPPERCASE.toLowerCase());
+              changeSettingsHandler(types.UPPERCASE);
             }}
           />
           <span>use uppercase</span>
@@ -62,9 +63,9 @@ function Settings({
           <input
             id="useSymbol"
             type="checkbox"
-            value={symbol}
+            value={settings[types.SYMBOL]}
             onChange={() => {
-              changeSettingsHandler(types.SYMBOL.toLowerCase());
+              changeSettingsHandler(types.SYMBOL);
             }}
           />
           <span>use special symbols</span>

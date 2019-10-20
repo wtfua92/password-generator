@@ -1,5 +1,4 @@
 import PasswordGenerator from "../src/tools/generator";
-import { types, regExps } from "../src/tools/constants";
 
 describe("PasswordGenerator", function() {
   let passwordGenerator;

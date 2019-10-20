@@ -1,118 +1,56 @@
-import { charRange, numRange, symbols, types, regExps } from "./constants";
+import { types } from "./constants";
 
 class PasswordGenerator {
-  constructor({
-    passwordLength = 8,
-    number = false,
-    symbol = false,
-    uppercase = false
-  }) {
-    this.passwordLength = passwordLength;
-    this.useNumber = number;
-    this.useSymbol = symbol;
-    this.useUpperCase = uppercase;
+  constructor() {
+    this.alphabeticValues = "abcdefghijklmnopqrstuvwxyz";
+    this[types.UPPERCASE] = this.alphabeticValues.toUpperCase();
+    this[types.INTEGER] = "0123456789";
+    this[types.SYMBOL] = "!@#$%^&*()";
   }
 
-  getRandom(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
+  getRandomNumber(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  generateRandomChar() {
-    return String.fromCharCode(this.getRandom(...charRange));
+  getRandomValue(values) {
+    return values[this.getRandomNumber(0, values.length - 1)];
   }
 
-  generateRandomInt() {
-    return this.getRandom(...numRange).toString();
+  passwordGeneratorValues(valueType) {
+    return this.alphabeticValues + this[valueType];
   }
 
-  generateRandomSymbol() {
-    return String.fromCharCode(symbols[this.getRandom(0, symbols.length)]);
-  }
-
-  generateRandomString() {
-    let result = "";
-    for (let i = 0; i < this.passwordLength; i++) {
-      result += this.generateRandomChar();
-    }
-    return result.toLowerCase();
-  }
-
-  canBeChanged(char) {
-    return (
-      !regExps[types.UPPERCASE].test(char) &&
-      !regExps[types.NUMBER].test(char) &&
-      !regExps[types.SYMBOL].test(char)
-    );
-  }
-
-  substituteChar(string, index, type) {
-    let newString = string;
-    switch (type) {
-      case types.NUMBER:
-        if (this.canBeChanged(newString[index])) {
-          newString =
-            newString.substr(0, index) +
-            this.generateRandomInt() +
-            newString.substr(index + 1);
-        }
-        return newString;
-      case types.SYMBOL:
-        if (this.canBeChanged(newString[index])) {
-          newString =
-            newString.substr(0, index) +
-            this.generateRandomSymbol() +
-            newString.substr(index + 1);
-        }
-        return newString;
-      case types.UPPERCASE:
-        if (this.canBeChanged(newString[index])) {
-          newString =
-            newString.substr(0, index) +
-            newString[index].toUpperCase() +
-            newString.substr(index + 1);
-        }
-        return newString;
-      default:
-        return string;
-    }
-  }
-
-  getAmountOfSubstitutes() {
-    return this.getRandom(1, Math.floor(this.passwordLength / 4) + 1);
-  }
-
-  generateSecurePassword() {
-    let password = this.generateRandomString();
-    if (this.useUpperCase) {
-      const howManyUpperCase = this.getAmountOfSubstitutes();
-      for (let i = 0; i < howManyUpperCase; i++) {
-        password = this.substituteChar(
-          password,
-          this.getRandom(0, password.length),
-          types.UPPERCASE
-        );
+  passwordMeetsRequirements(password, settings = {}) {
+    let validPassword = [];
+    for (let setting in settings) {
+      if (settings[setting]) {
+        const regex = new RegExp(`[${this[setting]}]`);
+        validPassword.push(password.search(regex) >= 0);
       }
     }
-    if (this.useNumber) {
-      const howManyNumbers = this.getAmountOfSubstitutes();
-      for (let i = 0; i < howManyNumbers; i++) {
-        password = this.substituteChar(
-          password,
-          this.getRandom(0, password.length),
-          types.NUMBER
-        );
+    return !validPassword.includes(false);
+  }
+
+  generatePassword(passwordLength = 8, passwordSettings = {}) {
+    let password = "";
+    let values = this.alphabeticValues;
+
+    for (let setting in passwordSettings) {
+      if (passwordSettings[setting]) {
+        values += this.passwordGeneratorValues(setting);
       }
     }
-    if (this.useSymbol) {
-      const howManySymbols = this.getAmountOfSubstitutes();
-      for (let i = 0; i < howManySymbols; i++) {
-        password = this.substituteChar(
-          password,
-          this.getRandom(0, password.length),
-          types.SYMBOL
-        );
-      }
+
+    for (let i = 0; i < passwordLength; i++) {
+      password += this.getRandomValue(values);
     }
+
+    if (!this.passwordMeetsRequirements(password, passwordSettings)) {
+      password = this.generatePassword(passwordLength, passwordSettings);
+    }
+
     return password;
   }
 }
