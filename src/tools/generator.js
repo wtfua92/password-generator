@@ -18,8 +18,11 @@ class PasswordGenerator {
     return values[this.getRandomNumber(0, values.length - 1)];
   }
 
-  passwordGeneratorValues(valueType) {
-    return this.alphabeticValues + this[valueType];
+  passwordGeneratorValues(valueType = "") {
+    if (this[valueType]) {
+      return this.alphabeticValues + this[valueType];
+    }
+    return this.alphabeticValues;
   }
 
   passwordMeetsRequirements(password, settings = {}) {
