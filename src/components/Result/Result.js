@@ -26,8 +26,8 @@ function Result({ currentPassword }) {
         title="Copy to clipboard"
       >
         <img
-          alt="Copy password"
-          src="https://img.icons8.com/material-rounded/24/000000/copy.png"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAATklEQVRIiWNgGOqAEYn9n4pmwQEThYYSBCxYxLC6hFwwID6AAarEyYD6AAZIjRMUn9PcB6MWjFowagFqTqZqKQoDg6IsoqhUpbkPhj4AABQZBDNxiXEsAAAAAElFTkSuQmCC"
+          alt="Copy to clipboard"
         />
       </button>
     </div>
