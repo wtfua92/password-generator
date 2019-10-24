@@ -1,5 +1,5 @@
 import { hot } from "react-hot-loader/root";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import PasswordGenerator from "./tools/generator";
 import Result from "./components/Result/Result";
@@ -7,6 +7,7 @@ import Settings from "./components/Settings/Settings";
 import { types } from "./tools/constants";
 
 const App = function() {
+  const passwordGenerator = new PasswordGenerator();
   const [currentPassword, setCurrentPassword] = useState("");
   const [settings, setSettings] = useState({
     [types.SYMBOL]: false,
@@ -16,7 +17,6 @@ const App = function() {
   const [passwordLength, setPasswordLength] = useState(8);
 
   const generatePasswordHandler = () => {
-    const passwordGenerator = new PasswordGenerator();
     setCurrentPassword(
       passwordGenerator.generatePassword(passwordLength, settings)
     );
@@ -29,6 +29,10 @@ const App = function() {
   const changePasswordLengthHandler = value => {
     setPasswordLength(value);
   };
+
+  useEffect(() => {
+    generatePasswordHandler();
+  }, [settings, passwordLength]);
 
   return (
     <div className="password-generator">

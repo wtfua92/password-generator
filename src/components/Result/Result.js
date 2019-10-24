@@ -4,6 +4,10 @@ import PropTypes from "prop-types";
 import "./Result.scss";
 
 function Result({ currentPassword }) {
+  const savePasswordToClipboard = password => {
+    navigator.clipboard.writeText(password);
+  };
+
   return (
     <div className="password-generator__result">
       <label htmlFor="password">Your Secure Password: </label>
@@ -14,6 +18,18 @@ function Result({ currentPassword }) {
         value={currentPassword}
         disabled
       />
+      <button
+        type="button"
+        onClick={() => {
+          savePasswordToClipboard(currentPassword);
+        }}
+        title="Copy to clipboard"
+      >
+        <img
+          alt="Copy password"
+          src="https://img.icons8.com/material-rounded/24/000000/copy.png"
+        />
+      </button>
     </div>
   );
 }

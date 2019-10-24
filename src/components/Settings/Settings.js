@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+import "./Settings.scss";
+
 import { types } from "../../tools/constants";
+import SettingsItem from "./SettingsItem";
 
 Settings.propTypes = {
   passwordLength: PropTypes.number,
@@ -22,55 +26,49 @@ function Settings({
   return (
     <div className="password-generator__settings">
       <div className="password-generator__settings__length">
-        <label htmlFor="passwordLength">Length: </label>
+        <label htmlFor="passwordLengthNumber">Length: </label>
         <input
           id="passwordLength"
+          type="range"
+          min={8}
+          max={16}
+          value={passwordLength}
+          onChange={({ target }) => {
+            changePasswordLengthHandler(parseInt(target.value));
+          }}
+        />
+        <input
+          id="passwordLengthNumber"
           type="number"
+          min={8}
+          max={16}
           value={passwordLength}
           onChange={({ target }) => {
             changePasswordLengthHandler(parseInt(target.value));
           }}
         />
       </div>
-      <div className="password-generator__settings__item">
-        <label htmlFor="useNumber">
-          <input
-            id="useNumber"
-            type="checkbox"
-            value={settings[types.INTEGER]}
-            onChange={() => {
-              changeSettingsHandler(types.INTEGER);
-            }}
-          />
-          <span>use number</span>
-        </label>
-      </div>
-      <div className="password-generator__settings__item">
-        <label htmlFor="useUpperCase">
-          <input
-            id="useUpperCase"
-            type="checkbox"
-            value={settings[types.UPPERCASE]}
-            onChange={() => {
-              changeSettingsHandler(types.UPPERCASE);
-            }}
-          />
-          <span>use uppercase</span>
-        </label>
-      </div>
-      <div className="password-generator__settings__item">
-        <label htmlFor="useSymbol">
-          <input
-            id="useSymbol"
-            type="checkbox"
-            value={settings[types.SYMBOL]}
-            onChange={() => {
-              changeSettingsHandler(types.SYMBOL);
-            }}
-          />
-          <span>use special symbols</span>
-        </label>
-      </div>
+      <SettingsItem
+        value={settings[types.INTEGER]}
+        onChangeHandler={() => {
+          changeSettingsHandler(types.INTEGER);
+        }}
+        type={types.INTEGER}
+      />
+      <SettingsItem
+        value={settings[types.UPPERCASE]}
+        onChangeHandler={() => {
+          changeSettingsHandler(types.UPPERCASE);
+        }}
+        type={types.UPPERCASE}
+      />
+      <SettingsItem
+        value={settings[types.SYMBOL]}
+        onChangeHandler={() => {
+          changeSettingsHandler(types.SYMBOL);
+        }}
+        type={types.SYMBOL}
+      />
     </div>
   );
 }

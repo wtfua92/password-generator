@@ -1,5 +1,5 @@
-import PasswordGenerator from "../src/tools/generator";
-import { types } from "../src/tools/constants";
+import PasswordGenerator from "../generator";
+import { types } from "../constants";
 
 describe("PasswordGenerator", function() {
   let passwordGenerator;
