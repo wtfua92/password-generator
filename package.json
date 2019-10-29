@@ -6,10 +6,11 @@
   "main": "src/index.js",
   "scripts": {
     "clear": "rm -rf dist",
-    "dev": "NODE_ENV=development webpack-dev-server --hot --open --mode=development",
-    "build": "NODE_ENV=production npm run clear && webpack --mode=production",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --open --mode=development",
+    "build": "cross-env NODE_ENV=production npm run clear && webpack --mode=production",
     "deploy": "npm run build && surge dist elite-drum.surge.sh",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:e2e": "cypress open"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,8 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
+    "cross-env": "^6.0.3",
+    "cypress": "^3.5.0",
     "eslint": "^6.5.0",
     "eslint-config-prettier": "^6.4.0",
     "eslint-loader": "^3.0.2",
