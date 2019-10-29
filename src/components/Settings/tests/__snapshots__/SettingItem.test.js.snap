@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SettingsItem /> should match snapshot 1`] = `
+<div
+  class="password-generator__settings__item"
+>
+  <label
+    for="setting-item-integer"
+  >
+    <input
+      id="setting-item-integer"
+      type="checkbox"
+      value="false"
+    />
+    <span>
+      use 
+      integer
+    </span>
+  </label>
+</div>
+`;

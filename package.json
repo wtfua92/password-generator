@@ -51,6 +51,9 @@
     "webpack-dev-server": "^3.8.1"
   },
   "jest": {
-    "verbose": true
+    "verbose": true,
+    "moduleNameMapper": {
+      "\\.(scss)$": "<rootDir>/tests/__mocks__/styleMock.js"
+    }
   }
 }

@@ -30,13 +30,20 @@ const App = function() {
     setPasswordLength(value);
   };
 
+  const savePasswordToClipboard = password => {
+    navigator.clipboard.writeText(password);
+  };
+
   useEffect(() => {
     generatePasswordHandler();
   }, [settings, passwordLength]);
 
   return (
     <div className="password-generator">
-      <Result currentPassword={currentPassword} />
+      <Result
+        currentPassword={currentPassword}
+        savePasswordToClipboard={savePasswordToClipboard}
+      />
       <Settings
         passwordLength={passwordLength}
         settings={settings}

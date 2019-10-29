@@ -9,15 +9,19 @@ function SettingsItem({ value, onChangeHandler, type }) {
           id={`setting-item-${type}`}
           type="checkbox"
           value={value}
-          onChange={() => {
-            onChangeHandler(type);
-          }}
+          onChange={() => onChangeHandler(type)}
         />
         <span>use {type}</span>
       </label>
     </div>
   );
 }
+
+SettingsItem.defaultProps = {
+  value: false,
+  onChangeHandler: () => {},
+  type: ""
+};
 
 SettingsItem.propTypes = {
   value: PropTypes.bool,
