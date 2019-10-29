@@ -9,6 +9,14 @@ describe("<Result />", () => {
 
   afterEach(cleanup);
 
+  it("should not change class if password isn't provided", () => {
+    const { getByLabelText } = render(<Result currentPassword={""} />);
+    const input = getByLabelText("Your Secure Password:");
+    expect(input).toBeDefined();
+    expect(input).toHaveValue("");
+    expect(input).not.toHaveClass("with-password");
+  });
+
   it("should display password", () => {
     const { getByDisplayValue } = render(<Result currentPassword={password} />);
     const input = getByDisplayValue(password);

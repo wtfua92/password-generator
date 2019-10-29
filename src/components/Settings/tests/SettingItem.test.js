@@ -5,7 +5,7 @@ import "@testing-library/jest-dom/extend-expect";
 import SettingsItem from "../SettingsItem";
 import { types } from "../../../tools/constants";
 
-describe("<SettingsItem />", function() {
+describe("<PasswordLength />", function() {
   const onChangeHandlerMock = jest.fn();
   const props = {
     value: false,

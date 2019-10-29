@@ -3,19 +3,8 @@ import PropTypes from "prop-types";
 
 import "./Settings.scss";
 
-import { types } from "../../tools/constants";
 import SettingsItem from "./SettingsItem";
-
-Settings.propTypes = {
-  passwordLength: PropTypes.number,
-  settings: PropTypes.shape({
-    [types.UPPERCASE]: PropTypes.bool,
-    [types.INTEGER]: PropTypes.bool,
-    [types.SYMBOL]: PropTypes.bool
-  }),
-  changeSettingsHandler: PropTypes.func,
-  changePasswordLengthHandler: PropTypes.func
-};
+import PasswordLength from "./PasswordLength";
 
 function Settings({
   settings,
@@ -25,52 +14,34 @@ function Settings({
 }) {
   return (
     <div className="password-generator__settings">
-      <div className="password-generator__settings__length">
-        <label htmlFor="passwordLengthNumber">Length: </label>
-        <input
-          id="passwordLength"
-          type="range"
-          min={8}
-          max={16}
-          value={passwordLength}
-          onChange={({ target }) => {
-            changePasswordLengthHandler(parseInt(target.value));
-          }}
+      <PasswordLength
+        passwordLength={passwordLength}
+        changePasswordLengthHandler={changePasswordLengthHandler}
+      />
+      {Object.keys(settings).map(type => (
+        <SettingsItem
+          value={settings[type]}
+          key={type}
+          onChangeHandler={() => changeSettingsHandler(type)}
+          type={type}
         />
-        <input
-          id="passwordLengthNumber"
-          type="number"
-          min={8}
-          max={16}
-          value={passwordLength}
-          onChange={({ target }) => {
-            changePasswordLengthHandler(parseInt(target.value));
-          }}
-        />
-      </div>
-      <SettingsItem
-        value={settings[types.INTEGER]}
-        onChangeHandler={() => {
-          changeSettingsHandler(types.INTEGER);
-        }}
-        type={types.INTEGER}
-      />
-      <SettingsItem
-        value={settings[types.UPPERCASE]}
-        onChangeHandler={() => {
-          changeSettingsHandler(types.UPPERCASE);
-        }}
-        type={types.UPPERCASE}
-      />
-      <SettingsItem
-        value={settings[types.SYMBOL]}
-        onChangeHandler={() => {
-          changeSettingsHandler(types.SYMBOL);
-        }}
-        type={types.SYMBOL}
-      />
+      ))}
     </div>
   );
 }
+
+Settings.propTypes = {
+  passwordLength: PropTypes.number.isRequired,
+  settings: PropTypes.object.isRequired,
+  changeSettingsHandler: PropTypes.func.isRequired,
+  changePasswordLengthHandler: PropTypes.func.isRequired
+};
+
+Settings.defaultProps = {
+  settings: {},
+  passwordLength: 8,
+  changeSettingsHandler: () => {},
+  changePasswordLengthHandler: () => {}
+};
 
 export default Settings;

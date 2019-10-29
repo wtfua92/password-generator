@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Settings /> should match snapshot 1`] = `
+<div
+  class="password-generator__settings"
+>
+  <div
+    class="password-generator__settings__length"
+  >
+    <label
+      for="passwordLengthNumber"
+    >
+      Length: 
+    </label>
+    <input
+      id="passwordLength"
+      max="16"
+      min="8"
+      type="range"
+      value="12"
+    />
+    <input
+      id="passwordLengthNumber"
+      max="16"
+      min="8"
+      type="number"
+      value="12"
+    />
+  </div>
+  <div
+    class="password-generator__settings__item"
+  >
+    <label
+      for="setting-item-integer"
+    >
+      <input
+        id="setting-item-integer"
+        type="checkbox"
+        value="false"
+      />
+      <span>
+        use 
+        integer
+      </span>
+    </label>
+  </div>
+  <div
+    class="password-generator__settings__item"
+  >
+    <label
+      for="setting-item-symbol"
+    >
+      <input
+        id="setting-item-symbol"
+        type="checkbox"
+        value="false"
+      />
+      <span>
+        use 
+        symbol
+      </span>
+    </label>
+  </div>
+  <div
+    class="password-generator__settings__item"
+  >
+    <label
+      for="setting-item-uppercase"
+    >
+      <input
+        id="setting-item-uppercase"
+        type="checkbox"
+        value="false"
+      />
+      <span>
+        use 
+        uppercase
+      </span>
+    </label>
+  </div>
+</div>
+`;

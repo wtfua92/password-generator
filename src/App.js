@@ -10,9 +10,9 @@ const App = function() {
   const passwordGenerator = new PasswordGenerator();
   const [currentPassword, setCurrentPassword] = useState("");
   const [settings, setSettings] = useState({
-    [types.SYMBOL]: false,
+    [types.INTEGER]: false,
     [types.UPPERCASE]: false,
-    [types.INTEGER]: false
+    [types.SYMBOL]: false
   });
   const [passwordLength, setPasswordLength] = useState(8);
 
