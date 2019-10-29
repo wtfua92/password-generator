@@ -7,6 +7,6 @@ Small React app to generate a secure password.
 - Webpack 
 - SCSS
 - Jest
-- Cypress (yet to be implemented)
+- Cypress
 - ESLint
 - Prettier
